@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bright World Products</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #f8f9fa;
+    }
+    .product-card img {
+      max-width: 100%;
+      height: auto;
+    }
+    .category-list {
+      max-height: 300px;
+      overflow-y: auto;
+    }
+    .pagination .page-link {
+      color: #ffc107; /* Warning color for text */
+    }
+    .pagination .page-item.active .page-link {
+      background-color: #ffc107; /* Warning background for active page */
+      border-color: #ffc107;
+    }
+    #priceRange {
+      accent-color: #ffc107; /* Warning theme for slider */
+    }
+    .price-filter p {
+      color: #ffc107; /* Warning color for price text */
+    }
+ 
+    .card{
+      transition: 1s;
+    }
+   
+.card button:hover{
+  background-color: rgb(0, 0, 0);
+  
+  color: aliceblue;
+}
+
+             .logogrid__img {
+      object-fit: cover;
+      max-width: 120px;
+      max-height: 60px;
+      filter: grayscale(100%) contrast(25%);
+      transition: filter 0.3s ease;
+    }
+
+    .logogrid__img:hover {
+      filter: grayscale(0) contrast(100%);
+    }
+        *{
+            margin: 0px;
+            padding: 0px;
+          }
+          .navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgb(255, 255, 255)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
+}
+          #nav-links a{
+            color: white;
+            font-weight: bolder;
+            font-family:'Genos', sans-serif;
+            font-size: 23px;
+            }
+          .page-links{
+            color:rgb(255, 255, 255);
+          }
+          #nav-links a:hover{
+           
+            color:rgb(255, 230, 0) ;
+            bottom: 5px;
+          
+          }
+          .bg{
+            background-color: rgb(0, 0, 0);
+          }
+          .card::after {
+            display: block;
+            position: absolute;
+            bottom: -10px;
+            left: 20px;
+            width: calc(100% - 40px);
+            height: 35px;
+            background-color: #fff;
+            -webkit-box-shadow: 0 19px 28px 5px rgba(64,64,64,0.09);
+            box-shadow: 0 19px 28px 5px rgba(64,64,64,0.09);
+            content: '';
+            z-index: -1;
+        }
+        a.card {
+            text-decoration: none;
+        }
+        
+        .card {
+            position: relative;
+            border: 0;
+            border-radius: 0;
+            background-color: #fff;
+            -webkit-box-shadow: 0 12px 20px 1px rgba(64,64,64,0.09);
+            box-shadow: 0 12px 20px 1px rgba(64,64,64,0.09);
+        }
+        .card {
+            position: relative;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-orient: vertical;
+            -webkit-box-direction: normal;
+            -ms-flex-direction: column;
+            flex-direction: column;
+            min-width: 0;
+            word-wrap: break-word;
+            background-color: #fff;
+            background-clip: border-box;
+            border: 1px solid rgba(0,0,0,0.125);
+            border-radius: .25rem;
+        }
+        
+        .box-shadow {
+            -webkit-box-shadow: 0 12px 20px 1px rgba(64,64,64,0.09) !important;
+            box-shadow: 0 12px 20px 1px rgba(64,64,64,0.09) !important;
+        }
+        
+        .ml-auto, .mx-auto {
+            margin-left: auto !important;
+        }
+        .mr-auto, .mx-auto {
+            margin-right: auto !important;
+        }
+        .rounded-circle {
+            border-radius: 50% !important;
+        }
+        .bg-white {
+            background-color: #fff !important;
+        }
+        
+        .ml-auto, .mx-auto {
+            margin-left: auto !important;
+        }
+        
+        .mr-auto, .mx-auto {
+            margin-right: auto !important;
+        }
+        .d-block {
+            display: block !important;
+        }
+        img, figure {
+            max-width: 100%;
+            height: auto;
+            vertical-align: middle;
+        }
+        
+        .card-text {
+            padding-top: 12px;
+            color: #8c8c8c;
+        }
+        
+        .text-sm {
+            font-size: 12px !important;
+        }
+        p, .p {
+            margin: 0 0 16px;
+        }
+        
+        .card-title {
+            margin: 0;
+            font-family: "Montserrat",sans-serif;
+            font-size: 18px;
+            font-weight: 900;
+        }
+        
+        .pt-1, .py-1 {
+            padding-top: .25rem !important;
+        }
+        
+        .head-icon{
+            margin-top:18px;
+            color:rgb(247, 222, 0);
+            transition: 0.5s;
+        }
+        .head-icon:hover{
+           
+            color:rgb(0, 0, 0);
+        }
+        h1, h2 {
+      font-family: 'Playfair Display', serif;
+    }
+
+    h1 {
+      font-weight: 700;
+    }
+
+    h2 {
+      font-weight: 400;
+    }
+    @import url('https://fonts.googleapis.com/css?family=Muli&display=swap');
+
+* {
+	box-sizing: border-box;
+}
+
+body {
+	background-color: #f9f9f9;
+	font-family: 'Muli', sans-serif;
+}
+
+h1 {
+	margin: 50px 0 30px;
+	text-align: center;
+}
+
+.faqs-container {
+	margin: 0 auto;
+	max-width: 600px;
+}
+
+.faq {
+	background-color: transparent;
+	border: 1px solid #9FA4A8;
+	border-radius: 10px;
+	padding: 30px;
+	position: relative;
+	overflow: hidden;
+	margin: 20px 0;
+	transition: 0.3s ease;
+}
+
+.faq.active {
+	background-color: #fff;
+	box-shadow: 0 3px 6px rgba(0,0,0,0.1), 0 3px 6px rgba(0,0,0,0.1);
+}
+
+.faq.active::after, .faq.active::before {
+	color: #2ecc71;
+	content: '\f075';
+	font-family: 'Font Awesome 5 Free';
+	font-size: 7rem;
+	position: absolute;
+	opacity: 0.2;
+	top: 20px;
+	left: 20px;
+	z-index: 0;
+}
+
+.faq.active::before {
+	color: #3498db;
+	top: -10px;
+	left: -30px;
+	transform: rotateY(180deg);
+}
+
+.faq-title {
+	margin: 0 35px 0 0;
+}
+
+.faq-text {
+	display: none;
+	margin: 30px 0 0;
+}
+
+.faq.active .faq-text {
+	display: block;
+}
+
+.faq-toggle {
+	background-color: transparent;
+	border: none;
+	border-radius: 50%;
+	color: #fff;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 16px;
+	padding: 0;
+	position: absolute;
+	top: 30px;
+	right: 30px;
+	height: 30px;
+	width: 30px;
+}
+
+.faq-toggle:focus {
+	outline: none;
+}
+
+.faq.active .faq-toggle {
+	background-color: #9FA4A8;
+}
+
+.faq-toggle .fa-times {
+	display: none;
+}
+
+.faq.active .faq-toggle .fa-times {
+	display: block;
+}
+
+.faq-toggle .fa-chevron-down {
+	color: #83888E;
+}
+
+.faq.active .faq-toggle .fa-chevron-down {
+	display: none;
+}
+
+/* SOCIAL PANEL CSS */
+.social-panel-container {
+	position: fixed;
+	right: 0;
+	bottom: 80px;
+	transform: translateX(100%);
+	transition: transform 0.4s ease-in-out;
+}
+
+.social-panel-container.visible {
+	transform: translateX(-10px);
+}
+
+.social-panel {	
+	background-color: #fff;
+	border-radius: 16px;
+	box-shadow: 0 16px 31px -17px rgba(0,31,97,0.6);
+	border: 5px solid #001F61;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	font-family: 'Muli';
+	position: relative;
+	height: 169px;	
+	width: 370px;
+	max-width: calc(100% - 10px);
+}
+
+.social-panel button.close-btn {
+	border: 0;
+	color: #97A5CE;
+	cursor: pointer;
+	font-size: 20px;
+	position: absolute;
+	top: 5px;
+	right: 5px;
+}
+
+.social-panel button.close-btn:focus {
+	outline: none;
+}
+
+.social-panel p {
+	background-color: #001F61;
+	border-radius: 0 0 10px 10px;
+	color: #fff;
+	font-size: 14px;
+	line-height: 18px;
+	padding: 2px 17px 6px;
+	position: absolute;
+	top: 0;
+	left: 50%;
+	margin: 0;
+	transform: translateX(-50%);
+	text-align: center;
+	width: 235px;
+}
+
+.social-panel p i {
+	margin: 0 5px;
+}
+
+.social-panel p a {
+	color: #FF7500;
+	text-decoration: none;
+}
+
+.social-panel h4 {
+	margin: 20px 0;
+	color: #97A5CE;	
+	font-family: 'Muli';	
+	font-size: 14px;	
+	line-height: 18px;
+	text-transform: uppercase;
+}
+
+.social-panel ul {
+	display: flex;
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+}
+
+.social-panel ul li {
+	margin: 0 10px;
+}
+
+.social-panel ul li a {
+	border: 1px solid #DCE1F2;
+	border-radius: 50%;
+	color: #001F61;
+	font-size: 20px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 50px;
+	width: 50px;
+	text-decoration: none;
+}
+
+.social-panel ul li a:hover {
+	border-color: #FF6A00;
+	box-shadow: 0 9px 12px -9px #FF6A00;
+}
+
+.floating-btn {
+	border-radius: 26.5px;
+	background-color: rgb(247, 222, 0);
+	border: 1px solid rgb(247, 222, 0);
+	box-shadow: 0 16px 22px -17px #03153B;
+	color: #000000;
+	cursor: pointer;
+	font-size: 16px;
+	line-height: 20px;
+	padding: 12px 20px;
+	position: fixed;
+	bottom: 20px;
+	right: 20px;
+	z-index: 999;
+}
+
+.floating-btn:hover {
+	background-color: #ffffff;
+	color: #001F61;
+}
+
+.floating-btn:focus {
+	outline: none;
+}
+
+.floating-text {
+	background-color: #001F61;
+	border-radius: 10px 10px 0 0;
+	color: #fff;
+	font-family: 'Muli';
+	padding: 7px 15px;
+	position: fixed;
+	bottom: 0;
+	left: 50%;
+	transform: translateX(-50%);
+	text-align: center;
+	z-index: 998;
+}
+
+.floating-text a {
+	color: #FF7500;
+	text-decoration: none;
+}
+
+@media screen and (max-width: 480px) {
+
+	.social-panel-container.visible {
+		transform: translateX(0px);
+	}
+	
+	.floating-btn {
+		right: 10px;
+	}
+}
+    .card-overlay {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      background-color: rgba(0, 0, 0, 0.5);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      transition: opacity 0.5s ease-in-out;
+    }
+
+    .card:hover .card-overlay {
+      opacity: 0.8;
+    }
+
+    .custom-shape-divider {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      overflow: hidden;
+      line-height: 0;
+    }
+
+    .custom-shape-divider svg {
+      position: relative;
+      display: block;
+      width: 183%;
+      height: 80px;
+      transform: rotateY(180deg);
+    }
+
+    .custom-shape-divider .shape-fill {
+      fill: #FFFFFF;
+    }
+    .heading{
+      color: #000000;
+      font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+      font-size: 30px;
+      transition: 2s;
+    }
+    .heading:hover{
+      color: rgb(255, 221, 0);
+      font-size: 35px;
+     
+    }
+    .hover{
+transition: 1s;
+    }
+    .hover:hover{
+      font-size: large;
+    }
+    
+  </style>
+</head>
+<body>
+    <nav id="nav" class="navbar navbar-expand-lg bg">
+        <div class="container" id="container">
+            <img src="img/llg.jpg" style="height: 55px; margin: 5px; " alt="">
+            <p style="font-weight: bolder; font-size: 35px; margin-top: 20px; color: rgb(255, 230, 0)">Bright <span
+                    style="color: white;">World</span></p>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+  
+            <div class="collapse navbar-collapse justify-content-center abc" id="navbarSupportedContent">
+                <ul class="nav justify-content-center " id="nav-links">
+                    <li class="align-content-center nav-item">
+                        <a style="font-size: 20px;" class="nav-link active text-center" aria-current="page" href="Index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a style="font-size: 20px;" class="nav-link text-center" href="products.html">Products</a>
+                    </li>
+                    <li class="nav-item">
+                        <a style="font-size: 20px;" class="nav-link text-center" href="w.html">About Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a style="font-size: 20px;" class="nav-link text-center" href="contact.html">Contact Us</a>
+                    </li>
+            </div>
+        </div>
+  
+       
+    </nav>
+<div class="container mt-5">
+ 
+  <div class="row">
+    <!-- Sidebar -->
+    <div class="col-md-3">
+      <h5 class="mb-3">Filter by Price</h5>
+      <div class="price-filter">
+        <input type="range" min="250" max="5200" step="50" id="priceRange" onchange="updatePrice()">
+        <p id="priceValue">Rs 250 - Rs 5200</p>
+      </div>
+      
+      <h5 class="mt-4 mb-3">Product Categories</h5>
+      <ul class="list-group category-list">
+      
+        <li class="list-group-item">LED BULBS</li>
+        <li class="list-group-item">DECORATIVE LIGHTS</li>
+        <li class="list-group-item">OUTDOOR LIGHTS</li>
+        
+      </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div class="col-md-9">
+      <div class="d-flex justify-content-between mb-4">
+        <div>
+          <span>Show: </span>
+          <select class="form-select d-inline w-auto" id="productsPerPage" onchange="setupPagination()">
+            <option value="6">6</option>
+            <option value="9" selected>9</option>
+            <option value="12">12</option>
+          </select>
+        </div>
+        <div>
+          <span>Sort by: </span>
+          <select class="form-select d-inline w-auto">
+            <option value="default">Default sorting</option>
+            <option value="price-low-high">Price: Low to High</option>
+            <option value="price-high-low">Price: High to Low</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="row" id="productContainer">
+        <!-- Product Cards (Will be generated dynamically) -->
+      </div>
+
+      <!-- Pagination -->
+      <nav>
+        <ul class="pagination" id="paginationContainer"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+<!-- Bootstrap JS & Popper.js -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    // Product Data with .webp images
+    const products = [
+      { name: "3Watt Rotate Multi Color LED Bulb", price: "Rs 350.00", image: "1.jpg" },
+      { name: "Edison Bulb", price: "Rs 650.00", image: "3.jpg" },
+      { name: "Hello Gorgeous Neon Light", price: "Rs 3,500.00", image: "2.jpg" },
+      { name: "Filament Candle", price: "Rs 250.00", image: "7.webp" },
+      { name: "4in1 Chandelier Pendant Light", price: "Rs 4,000.00", image: "8.webp" },
+      { name: "Pendant Holder", price: "Rs 350.00", image: "6.webp" },
+      { name: "Hanging Wire Set", price: "Rs 499.00", image: "7.webp" },
+      { name: "Surface Light", price: "Rs 1,200.00", image: "8.webp" },
+      { name: "Neon Lamp", price: "Rs 3,800.00", image: "9.webp" },
+      { name: "Smart LED Bulb", price: "Rs 1,500.00", image: "10.webp" },
+      { name: "Decorative LED String", price: "Rs 750.00", image: "11.webp" },
+      { name: "Wall Lamp", price: "Rs 2,100.00", image: "12.webp" },
+      { name: "Crystal Chandelier", price: "Rs 5,200.00", image: "13.webp" },
+      { name: "Desk Lamp", price: "Rs 850.00", image: "14.webp" },
+      { name: "Pendant Light", price: "Rs 1,400.00", image: "15.webp" },
+      { name: "LED Strip", price: "Rs 1,000.00", image: "21.webp" },
+      { name: "Vintage Bulb", price: "Rs 550.00", image: "17.webp" },
+      { name: "Outdoor Light", price: "Rs 3,000.00", image: "18.webp" },
+      { name: "Table Lamp", price: "Rs 1,200.00", image: "19.webp" },
+      { name: "Lantern Light", price: "Rs 1,750.00", image: "20.webp" },
+      { name: "Dimmable LED", price: "Rs 2,200.00", image: "21.webp" },
+      { name: "Candlelight Bulb", price: "Rs 400.00", image: "22.webp" },
+      { name: "Spotlight", price: "Rs 2,600.00", image: "23.webp" },
+      { name: "Modern Floor Lamp", price: "Rs 6,000.00", image: "24.webp" },
+      { name: "Chandelier", price: "Rs 8,500.00", image: "25.webp" },
+      { name: "Ceiling Light", price: "Rs 3,200.00", image: "26.webp" }
+    ];
+  
+    const productsPerPage = 9;
+    let currentPage = 1;
+    let filteredProducts = products;
+
+    // Function to render products
+    function renderProducts(page = 1) {
+        const start = (page - 1) * productsPerPage;
+        const end = start + productsPerPage;
+        const displayedProducts = filteredProducts.slice(start, end);
+
+        productContainer.innerHTML = displayedProducts.map(product => `
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <img src="images/${product.image}" class="card-img-top" alt="${product.name}">
+                    <div class="card-body">
+                        <h5 class="card-title">${product.name}</h5>
+                        <p class="card-text">${product.price}</p>
+                        <button class="btn btn-warning">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    // Function to setup pagination
+    function setupPagination() {
+        const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
+        paginationContainer.innerHTML = Array.from({ length: totalPages }, (_, i) => `
+            <li class="page-item ${i + 1 === currentPage ? 'active' : ''}">
+                <a class="page-link" href="#" onclick="changePage(${i + 1})">${i + 1}</a>
+            </li>
+        `).join('');
+    }
+
+    // Change page
+    function changePage(page) {
+        currentPage = page;
+        renderProducts(page);
+        setupPagination();
+    }
+
+    // Update price range
+    function updatePrice() {
+        const range = document.getElementById("priceRange");
+        const value = range.value;
+        document.getElementById("priceValue").textContent = `Rs 250 - Rs ${value}`;
+        filteredProducts = products.filter(product => parseInt(product.price.replace('Rs ', '').replace(',', '')) <= value);
+        currentPage = 1;
+        renderProducts();
+        setupPagination();
+    }
+
+    // Initialize
+    document.getElementById("productsPerPage").addEventListener("change", (e) => {
+        productsPerPage = parseInt(e.target.value);
+        currentPage = 1;
+        renderProducts();
+        setupPagination();
+    });
+
+    renderProducts();
+    setupPagination();
+
+  </script>
+  <footer class=" text-dark pt-5 pb-4">
+    <div class="text-center text-md-left">
+<div class="row text-center text-md-left">
+
+<div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
+<h5 class="text-uppercase mb-4 font-weight-bold text-warning text-dark" >Company</h5>
+<hr>
+<a href="#" class="text-dark" style="text-decoration: none;" >Resedential resource</a>
+</p>
+
+<p>
+    <a href="#" class="text-dark" style="text-decoration: none;" >Affliate marketing</a>
+</p>
+
+<p>
+    <a href="#" class="text-dark" style="text-decoration: none;" >Join our team</a>
+</p>
+
+<p>
+    <a href="#" class="text-dark" style="text-decoration: none;" >About us</a>
+</p>
+
+
+</div>
+
+
+<div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
+<h5 class="text-uppercase mb-4 font-weight-bold text-warning text-dark" >Offices</h5>
+<hr>
+
+<a href="#" class="text-dark" style="text-decoration: none;" >Karachi</a>
+</p>
+
+<p>
+    <a href="#" class="text-dark" style="text-decoration: none;" >Lahore</a>
+</p>
+
+<p>
+    <a href="#" class="text-dark" style="text-decoration: none;" >Islamabad</a>
+</p>
+
+<p>
+    <a href="#" class="text-dark" style="text-decoration: none;" >Peshawar</a>
+</p>
+
+<p>
+    <a href="#" class="text-dark" style="text-decoration: none;" >Rawalpindi</a>
+</p>
+</div>
+
+
+<div class="col-md-4 col-lg-2 col-xl-2 mx-auto mt-3">
+<h5 class="text-uppercase mb-4 font-weight-bold text-warning text-dark">Support</h5>
+<hr>
+<a href="#" class="text-dark" style="text-decoration: none;" >Why Us?</a>
+</p>
+
+<p>
+    <a href="#" class="text-dark" style="text-decoration: none;" >Contact us</a>
+</p>
+
+<p>
+    <a href="#" class="text-dark" style="text-decoration: none;" >Signup</a>
+</p>
+
+<!-- <p>
+    <a href="#" class="text-white" style="text-decoration: none;" ></a>
+</p>
+
+<p>
+    <a href="#" class="text-white" style="text-decoration: none;" >Dallas/Forth worth</a>
+</p> -->
+</div>
+
+<div class="col-md-5 col-lg-2 col-xl-2 mx-auto mt-3">
+<h5 class="text-uppercase mb-4 font-weight-bold text-warning text-dark">News letter</h5>
+<hr>
+<p>
+Sign up for our newsletter and recieve more details.
+</p>
+
+<button style="background-color: rgb(0, 0, 0);
+color: white;  height: 60px; width: 200px;">Sign up</button>
+
+
+
+</div>
+<hr>
+<div style="text-align: center;">Copyright 2021 bright world All right reserved</div>
+</div>
+    </div>
+
+</footer>
+
+</body>
+</html>

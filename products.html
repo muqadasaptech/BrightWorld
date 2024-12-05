@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Page with Pagination and Modal</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+ <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav id="nav" class="navbar navbar-expand-lg bg">
+        <div class="container" id="container">
+            <img src="img/llg.jpg" style="height: 55px; margin: 5px; " alt="">
+            <p style="font-weight: bolder; font-size: 35px; margin-top: 20px; color: rgb(255, 230, 0)">Bright <span
+                    style="color: white;">World</span></p>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+  
+            <div class="collapse navbar-collapse justify-content-center abc" id="navbarSupportedContent">
+                <ul class="nav justify-content-center " id="nav-links">
+                    <li class="align-content-center nav-item">
+                        <a style="font-size: 20px;" class="nav-link active text-center" aria-current="page" href="Index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a style="font-size: 20px;" class="nav-link text-center" href="products.html">Products</a>
+                    </li>
+                    <li class="nav-item">
+                        <a style="font-size: 20px;" class="nav-link text-center" href="about.html">About Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a style="font-size: 20px;" class="nav-link text-center" href="contact.html">Contact Us</a>
+                    </li>
+                    <!-- <li class="nav-item">
+                      <a style="text-decoration: none; font-size: 20px;" class="nav-item" href="signup.html" >Sign up</a>
+                  </li> -->
+
+                    
+            </div>
+        </div>
+  
+       
+    </nav>
+     <!-- banner img start -->
+     <div class="bg text-white">
+      <div class="container">
+          <div class="row align-items-center g-4">
+              <div class="col-lg-7 col-12 pb-5">
+                  <div class="text-center text-md-start">
+                      <div class="mb-5">
+                          <br><br>
+                          
+
+                           <h1 class="fw-bold display-5 aos-init" data-aos="fade-right" data-aos-duration="500"
+                              style="color: rgb(255, 255, 255);margin-left: 480px;font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;margin-top: -3px;text-align: center;">OUR <br>
+                              
+                              <span style="color: rgb(255, 230, 0);">PRODUCTS</span>
+                          </h1> 
+                      
+                     
+                      </div>
+                  </div>
+              </div>
+              
+          </div>
+      </div>
+
+      <!-- <div class="container mt-auto pb-5">
+          <div class="row mt-auto pb-4">
+              <div class="  rounded-4 p-4  border-dark mx-1 mx-md-0 cs-shadow " style=" backdrop-filter: blur(5px);">
+                  <div class="row g-4">
+                      <div class="col-lg-3 col-md-6 col-12 aos-init" data-aos="fade-up" data-aos-duration="500">
+                          
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div> -->
+  </div>
+
+
+  <!-- banner img End -->
+<div class="container mt-5">
+ 
+  <div class="row">
+    <!-- Sidebar -->
+    <div class="col-md-3">
+      <h5 class="mb-3">Filter by Price</h5>
+      <div class="price-filter">
+        <input type="range" min="250" max="5200" step="50" id="priceRange" onchange="updatePrice()">
+        <p id="priceValue">Rs 250 - Rs 5200</p>
+      </div>
+      
+      <h5 class="mt-4 mb-3">Product Categories</h5>
+      <ul class="list-group category-list">
+      
+        <li class="list-group-item">LED BULBS</li>
+        <li class="list-group-item">DECORATIVE LIGHTS</li>
+        <li class="list-group-item">OUTDOOR LIGHTS</li>
+        
+      </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div class="col-md-9">
+      <div class="d-flex justify-content-between mb-4">
+        <div>
+          <span>Show: </span>
+          <select class="form-select d-inline w-auto" id="productsPerPage" onchange="setupPagination()">
+            <option value="6">6</option>
+            <option value="9" selected>9</option>
+            <option value="12">12</option>
+          </select>
+        </div>
+        <div>
+          <span>Sort by: </span>
+          <select class="form-select d-inline w-auto">
+            <option value="default">Default sorting</option>
+            <option value="price-low-high">Price: Low to High</option>
+            <option value="price-high-low">Price: High to Low</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="row" id="productContainer">
+        <!-- Product Cards (Will be generated dynamically) -->
+      </div>
+
+      <!-- Pagination -->
+      <nav>
+        <ul class="pagination" id="paginationContainer"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade text-center" id="productModal" tabindex="-1" aria-hidden="true" data-bs-backdrop="true" data-bs-keyboard="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-body">
+        <img id="modalProductImage" src="" class="img-fluid mb-3" alt="Product Image">  
+        <h5 id="modalProductName" class="mb-2"></h5>
+        <p id="modalProductPrice" class="text-muted"></p>
+        <a href="checkout.html" type="button" class="btn btn-warning" data-bs-dismiss="modal">Buy Now</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Bootstrap JS & Popper.js -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    // Product Data with .webp images
+    const products = [
+      { name: "3Watt Rotate Multi Color LED Bulb", price: "Rs 350.00", image: "1.jpg" },
+      { name: "Edison Bulb", price: "Rs 650.00", image: "3.jpg" },
+      { name: "Hello Gorgeous Neon Light", price: "Rs 3,500.00", image: "2.jpg" },
+      { name: "Filament Candle", price: "Rs 250.00", image: "7.webp" },
+      { name: "4in1 Chandelier Pendant Light", price: "Rs 4,000.00", image: "8.webp" },
+      { name: "Pendant Holder", price: "Rs 350.00", image: "6.webp" },
+      { name: "Hanging Wire Set", price: "Rs 499.00", image: "7.webp" },
+      { name: "Surface Light", price: "Rs 1,200.00", image: "8.webp" },
+      { name: "Neon Lamp", price: "Rs 3,800.00", image: "9.webp" },
+      { name: "Smart LED Bulb", price: "Rs 1,500.00", image: "10.webp" },
+      { name: "Decorative LED String", price: "Rs 750.00", image: "11.webp" },
+      { name: "Wall Lamp", price: "Rs 2,100.00", image: "12.webp" },
+      { name: "Crystal Chandelier", price: "Rs 5,200.00", image: "13.webp" },
+      { name: "Desk Lamp", price: "Rs 850.00", image: "14.webp" },
+      { name: "Pendant Light", price: "Rs 1,400.00", image: "15.webp" },
+      { name: "LED Strip", price: "Rs 1,000.00", image: "21.webp" },
+      { name: "Vintage Bulb", price: "Rs 550.00", image: "17.webp" },
+      { name: "Outdoor Light", price: "Rs 3,000.00", image: "18.webp" },
+      { name: "Table Lamp", price: "Rs 1,200.00", image: "19.webp" },
+      { name: "Lantern Light", price: "Rs 1,750.00", image: "20.webp" },
+      { name: "Dimmable LED", price: "Rs 2,200.00", image: "21.webp" },
+      { name: "Candlelight Bulb", price: "Rs 400.00", image: "22.webp" },
+      { name: "Spotlight", price: "Rs 2,600.00", image: "23.webp" },
+      { name: "Modern Floor Lamp", price: "Rs 6,000.00", image: "24.webp" },
+      { name: "Chandelier", price: "Rs 8,500.00", image: "25.webp" },
+      { name: "Ceiling Light", price: "Rs 3,200.00", image: "26.webp" }
+    ];
+  
+    const productContainer = document.getElementById("productContainer");
+    const paginationContainer = document.getElementById("paginationContainer");
+    let currentPage = 1;
+    let productsPerPage = 9;
+  
+    // Function to render products
+    function renderProducts() {
+      productContainer.innerHTML = "";
+      const startIndex = (currentPage - 1) * productsPerPage;
+      const endIndex = startIndex + productsPerPage;
+      const visibleProducts = products.slice(startIndex, endIndex);
+  
+      visibleProducts.forEach((product, index) => {
+        const productCard = `
+          <div class="col-md-4 mb-4">
+            <div class="card">
+              <img src="${product.image}" class="card-img-top" alt="${product.name}">
+              <div class="card-body">
+                <h5 class="card-title">${product.name}</h5>
+                <p class="card-text">${product.price}</p>
+                <button class="btn btn-warning" onclick="showProductModal(${startIndex + index})">Buy Now</button>
+              </div>
+            </div>
+          </div>`;
+        productContainer.innerHTML += productCard;
+      });
+    }
+  
+    // Function to setup pagination
+    function setupPagination() {
+      paginationContainer.innerHTML = "";
+      productsPerPage = parseInt(document.getElementById("productsPerPage").value);
+      const totalPages = Math.ceil(products.length / productsPerPage);
+  
+      for (let i = 1; i <= totalPages; i++) {
+        const pageItem = `
+          <li class="page-item ${i === currentPage ? "active" : ""}">
+            <button class="page-link" onclick="changePage(${i})">${i}</button>
+          </li>`;
+        paginationContainer.innerHTML += pageItem;
+      }
+  
+      renderProducts();
+    }
+  
+    // Function to change page
+    function changePage(page) {
+      currentPage = page;
+      setupPagination();
+    }
+  
+    // Function to show modal with product details
+    function showProductModal(productIndex) {
+      const product = products[productIndex];
+      document.getElementById("modalProductName").innerText = product.name;
+      document.getElementById("modalProductPrice").innerText = product.price;
+      document.getElementById("modalProductImage").src = product.image;
+      const modal = new bootstrap.Modal(document.getElementById("productModal"));
+      modal.show();
+    }
+  
+    // Function to update price filter
+    function updatePrice() {
+      const rangeValue = document.getElementById("priceRange").value;
+      document.getElementById("priceValue").innerText = `Rs 250 - Rs ${rangeValue}`;
+    }
+  
+    // Initial setup
+    setupPagination();
+  </script>
+  <footer class=" text-dark pt-5 pb-4">
+    <div class="text-center text-md-left">
+<div class="row text-center text-md-left">
+
+<div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
+<h5 class="text-uppercase mb-4 font-weight-bold text-warning text-dark" >Company</h5>
+<hr>
+<a href="#" class="text-dark" style="text-decoration: none;" >Resedential resource</a>
+</p>
+
+<p>
+    <a href="#" class="text-dark" style="text-decoration: none;" >Affliate marketing</a>
+</p>
+
+<p>
+    <a href="#" class="text-dark" style="text-decoration: none;" >Join our team</a>
+</p>
+
+<p>
+    <a href="#" class="text-dark" style="text-decoration: none;" >About us</a>
+</p>
+
+
+</div>
+
+
+<div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
+<h5 class="text-uppercase mb-4 font-weight-bold text-warning text-dark" >Offices</h5>
+<hr>
+
+<a href="#" class="text-dark" style="text-decoration: none;" >Karachi</a>
+</p>
+
+<p>
+    <a href="#" class="text-dark" style="text-decoration: none;" >Lahore</a>
+</p>
+
+<p>
+    <a href="#" class="text-dark" style="text-decoration: none;" >Islamabad</a>
+</p>
+
+<p>
+    <a href="#" class="text-dark" style="text-decoration: none;" >Peshawar</a>
+</p>
+
+<p>
+    <a href="#" class="text-dark" style="text-decoration: none;" >Rawalpindi</a>
+</p>
+</div>
+
+
+<div class="col-md-4 col-lg-2 col-xl-2 mx-auto mt-3">
+<h5 class="text-uppercase mb-4 font-weight-bold text-warning text-dark">Support</h5>
+<hr>
+<a href="#" class="text-dark" style="text-decoration: none;" >Why Us?</a>
+</p>
+
+<p>
+    <a href="#" class="text-dark" style="text-decoration: none;" >Contact us</a>
+</p>
+
+<p>
+    <a href="#" class="text-dark" style="text-decoration: none;" >Signup</a>
+</p>
+
+<!-- <p>
+    <a href="#" class="text-white" style="text-decoration: none;" ></a>
+</p>
+
+<p>
+    <a href="#" class="text-white" style="text-decoration: none;" >Dallas/Forth worth</a>
+</p> -->
+</div>
+
+<div class="col-md-5 col-lg-2 col-xl-2 mx-auto mt-3">
+<h5 class="text-uppercase mb-4 font-weight-bold text-warning text-dark">News letter</h5>
+<hr>
+<p>
+Sign up for our newsletter and recieve more details.
+</p>
+
+<a href="signup.html" style="background-color: rgb(19, 19, 19);
+color: rgb(255, 238, 0);  height: 60px; width: 200px;padding: 15px 20px;border-radius: 50px;font-weight: 600;text-decoration: none;">Sign up</a>
+
+
+
+</div>
+<hr>
+<div style="text-align: center;">Copyright 2021 bright world All right reserved</div>
+</div>
+    </div>
+
+</footer>
+
+</body>
+</html>
